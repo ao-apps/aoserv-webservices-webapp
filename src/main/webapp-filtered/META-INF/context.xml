@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 aoserv-webservices-webapp - The Axis2-based AOServ Platform web services webapp.
-Copyright (C) 2009-2013, 2020, 2021  AO Industries, Inc.
+Copyright (C) 2021  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -22,8 +22,5 @@ You should have received a copy of the GNU Lesser General Public License
 along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses />.
 -->
 
-<!--
-	This file only exists so NetBeans knows the path to deploy the application.
-	Tomcat uses the filtered version in src/main/webapp-filtered/META-INF/contex.xml.
--->
-<Context path="/webservices"/>
+<!-- META-INF/context.xml is used for local development deployment only -->
+<Context path="/webservices" />

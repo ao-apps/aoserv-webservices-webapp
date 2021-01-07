@@ -21,7 +21,7 @@
     <!-- ================================================= -->
     <!-- Parameters -->
     <!-- ================================================= -->
-    <parameter name="hotdeployment">true</parameter>
+    <parameter name="hotdeployment">false</parameter><!-- AO Industries disabled -->
     <parameter name="hotupdate">false</parameter>
     <parameter name="enableMTOM">false</parameter>
     <parameter name="enableSwA">false</parameter>
@@ -97,11 +97,23 @@
 
     <!-- Following parameter will suppress generation of SOAP 1.2 bindings in auto-generated WSDL files -->
     <parameter name="disableSOAP12" locked="true">false</parameter>
+    
+    <!-- ================================================= -->
+    <!-- Deployers -->
+    <!-- ================================================= -->
+
+    <!--Service deployer , this will alow users to deploy AAR or exploded AAR as axis2 services-->
+    <deployer extension=".aar" directory="services" class="org.apache.axis2.deployment.ServiceDeployer">
+        <serviceBuilderExtension name ="jwsbuilderExt" class="org.apache.axis2.jaxws.framework.JAXWSServiceBuilderExtension"/>
+        <serviceBuilderExtension name ="wsdlbuilderExt" class="org.apache.axis2.deployment.WSDLServiceBuilderExtension"/>
+    </deployer>
 
     <!--POJO deployer , this will alow users to drop .class file and make that into a service-->
     <deployer extension=".class" directory="pojo" class="org.apache.axis2.deployment.POJODeployer"/>
+
     <deployer extension=".jar" directory="servicejars"
               class="org.apache.axis2.jaxws.framework.JAXWSDeployer"/>
+
     <deployer extension=".jar" directory="transports"
               class="org.apache.axis2.deployment.TransportDeployer"/>
 
@@ -142,15 +154,7 @@
     <!--all the other MEP implement it and add the correct entry to here , so that you can refer from-->
     <!--any operation -->
     <!--Note : You can override this for a particular service by adding the same element with your requirement-->
-    <messageReceivers>
-        <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only"
-                         class="org.apache.axis2.receivers.RawXMLINOnlyMessageReceiver"/>
-        <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
-                         class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
-        <messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-only"
-                         class="org.apache.axis2.receivers.RawXMLINOnlyMessageReceiver"/>
-        <messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out"
-                         class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+    <messageReceivers>   
         <messageReceiver mep="http://www.w3.org/ns/wsdl/in-only"
                          class="org.apache.axis2.receivers.RawXMLINOnlyMessageReceiver"/>
         <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out"
@@ -198,17 +202,14 @@
          with name="https" and specify the port parameter on both receivers.
          For more information, please have a look at the servlet transport documentation:
          http://axis.apache.org/axis2/java/core/docs/servlet-transport.html -->
-    <!--<transportReceiver name="http"
-                       class="org.apache.axis2.transport.http.AxisServletListener"/>-->
     <transportReceiver name="@{aoserv-webservices-webapp.axis2.receiver}" class="org.apache.axis2.transport.http.AxisServletListener">
         <parameter name="port">@{aoserv-webservices-webapp.axis2.port}</parameter>
         <parameter name="httpFrontendHostUrl">@{aoserv-webservices-webapp.axis2.httpFrontendHostUrl}</parameter>
     </transportReceiver>
-
     <!--Uncomment if you want to have TCP transport support-->
     <!--transportReceiver name="tcp"
                        class="org.apache.axis2.transport.tcp.TCPServer">
-        <parameter name="port">6060</parameter-->>
+        <parameter name="port">6060</parameter-->
     <!--If you want to give your own host address for EPR generation-->
     <!--uncomment the following paramter , and set it as you required.-->
     <!--<parameter name="hostname">tcp://myApp.com/ws</parameter>-->
