@@ -37,6 +37,7 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2021-01-07T09:30:19-06:00"
+		dateModified="2021-01-10T14:26:45-06:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -69,6 +70,10 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 							snapshot versions in production, be it a <code>*-SNAPSHOT</code> (developmental version) or a
 							<code>*-POST-SNAPSHOT</code> (maintenance version).
 						</p>
+					</li>
+					<li>
+						Removed truststore in <code>WEB-INF/truststore</code>, since master.aoindustries.com is now a
+						Let's Encrypt certificate.
 					</li>
 				</ul>
 			</changelog:release>
