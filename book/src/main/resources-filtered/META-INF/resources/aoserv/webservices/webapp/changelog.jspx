@@ -37,7 +37,7 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2021-01-07T09:30:19-06:00"
-		dateModified="2021-01-10T14:26:45-06:00"
+		dateModified="2021-02-05T18:52:03-06:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -46,37 +46,46 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
-			>
-				<ul>
-					<li>Project moved to GitHub and Maven.</li>
-					<li>Updated to Java EE 6.</li>
-					<li>Updated dependencies.</li>
-					<li>Selectively skipping build steps for <code>*-SNAPSHOT</code> builds.</li>
-					<li>Axis2 now built with overlay of Maven "war" artifact.</li>
-					<li>
-						<p>
-							No longer including the Axis2 username and password in Git and Maven artifacts.
-						</p>
-						<p>
-							The Maven properties for the filters are only set in the <code>development</code> (activated
-							while running in NetBeans) and <code>publish</code> (used for publishing to production Tomcat)
-							profiles.
-						</p>
-						<p>
-							The Axis2 username and password are not set on release builds, since release builds have neither
-							the <code>development</code> nor the <code>publish</code> profiles active.  Release builds are
-							deployed to artifact repositories, while snapshot builds are never deployed (they are only
-							installed locally or published to Tomcat).  This is consistent with the fact we only run
-							snapshot versions in production, be it a <code>*-SNAPSHOT</code> (developmental version) or a
-							<code>*-POST-SNAPSHOT</code> (maintenance version).
-						</p>
-					</li>
-					<li>
-						Removed truststore in <code>WEB-INF/truststore</code>, since master.aoindustries.com is now a
-						Let's Encrypt certificate.
-					</li>
-				</ul>
-			</changelog:release>
+			/>
 		</c:if>
+
+		<changelog:release
+			projectName="@{documented.name}"
+			version="1.84.13"
+			datePublished="2021-02-05T18:52:03-06:00"
+			groupId="@{project.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{project.scm.url}"
+		>
+			<ul>
+				<li>Project moved to GitHub and Maven.</li>
+				<li>Updated to Java EE 6.</li>
+				<li>Updated dependencies.</li>
+				<li>Selectively skipping build steps for <code>*-SNAPSHOT</code> builds.</li>
+				<li>Axis2 now built with overlay of Maven "war" artifact.</li>
+				<li>
+					<p>
+						No longer including the Axis2 username and password in Git and Maven artifacts.
+					</p>
+					<p>
+						The Maven properties for the filters are only set in the <code>development</code> (activated
+						while running in NetBeans) and <code>publish</code> (used for publishing to production Tomcat)
+						profiles.
+					</p>
+					<p>
+						The Axis2 username and password are not set on release builds, since release builds have neither
+						the <code>development</code> nor the <code>publish</code> profiles active.  Release builds are
+						deployed to artifact repositories, while snapshot builds are never deployed (they are only
+						installed locally or published to Tomcat).  This is consistent with the fact we only run
+						snapshot versions in production, be it a <code>*-SNAPSHOT</code> (developmental version) or a
+						<code>*-POST-SNAPSHOT</code> (maintenance version).
+					</p>
+				</li>
+				<li>
+					Removed truststore in <code>WEB-INF/truststore</code>, since master.aoindustries.com is now a
+					Let's Encrypt certificate.
+				</li>
+			</ul>
+		</changelog:release>
 	</core:page>
 </jsp:root>
