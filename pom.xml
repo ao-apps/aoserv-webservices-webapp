@@ -29,7 +29,7 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 		<relativePath>../../ao-oss-parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.aoindustries</groupId><artifactId>aoserv-webservices-webapp</artifactId><version>1.84.13-POST-SNAPSHOT</version>
+	<groupId>com.aoindustries</groupId><artifactId>aoserv-webservices-webapp</artifactId><version>1.84.22-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -170,6 +170,16 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 					</plugin>
 				</plugins>
 			</build>
+		</profile>
+		<!--
+			Required for bug "requireActiveProfile ignores inherited profiles in submoduless":
+			https://issues.apache.org/jira/browse/MENFORCER-226
+		-->
+		<profile>
+			<id>POST-SNAPSHOT</id>
+			<properties>
+				<POST-SNAPSHOT>-POST-SNAPSHOT</POST-SNAPSHOT>
+			</properties>
 		</profile>
 		<profile>
 			<id>publish</id>
