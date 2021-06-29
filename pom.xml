@@ -33,6 +33,14 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 	<packaging>war</packaging>
 
 	<properties>
+		<module.name>com.aoindustries.aoserv.webservices.webapp</module.name>
+		<!-- Stay on Java 1.8 since Axis fails with "Error looking for paramter names in bytecode: unexpected bytes in file". -->
+		<javase.version>1.8</javase.version>
+		<javase.release>8</javase.release>
+		<javadoc.link.javase>${javadoc.link.javase.8}</javadoc.link.javase>
+		<!-- This must be set in your ~/.m2/settings.xml when building with JDK < 9 -->
+		<javase.bootclasspath>${javase.bootclasspath.8}</javase.bootclasspath>
+
 		<description.html><![CDATA[The Axis2-based <a target="${javadoc.target}" href="https://aoindustries.com/aoserv/">AOServ Platform</a> web services webapp.]]></description.html>
 		<!-- TODO: Remove once moved to oss.aoapps.com -->
 		<google.analytics.trackingId>UA-86871646-1</google.analytics.trackingId>
@@ -103,6 +111,38 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 						<dependency>org.apache.axis2:axis2-webapp:war</dependency>
 						<dependency>com.aoindustries:aoserv-webservices:aar</dependency>
 					</ignoredUnusedDeclaredDependencies>
+				</configuration>
+			</plugin>
+			<!-- Java 1.8: see https://maven.apache.org/plugins/maven-compiler-plugin/examples/module-info.html -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId>
+				<executions>
+					<!-- compile everything to ensure module-info contains right entries -->
+					<execution>
+						<id>default-compile</id>
+						<configuration>
+							<release>9</release>
+						</configuration>
+					</execution>
+					<!-- recompile everything for target VM except the module-info.java -->
+					<!-- module-info.java only:
+					<execution>
+						<id>base-compile</id><goals><goal>compile</goal></goals>
+						<configuration>
+							<excludes>
+								<exclude>module-info.java</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+					-->
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<!-- Java 1.8: generate future-proof modular javadocs -->
+					<source>11</source>
+					<release>11</release>
 				</configuration>
 			</plugin>
 			<!-- Seems to not be required.  The aar file is still correctly put in WEB-INF/services:
@@ -185,7 +225,7 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 			</build>
 		</profile>
 		<!--
-			Required for bug "requireActiveProfile ignores inherited profiles in submoduless":
+			Required for bug "requireActiveProfile ignores inherited profiles in submodules":
 			https://issues.apache.org/jira/browse/MENFORCER-226
 		-->
 		<profile>
@@ -205,10 +245,6 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 								<id>require-publish-properties</id><goals><goal>enforce</goal></goals>
 								<configuration>
 									<rules>
-										<requireActiveProfile>
-											<message>"publish" requires "release" profile</message>
-											<profiles>release</profiles>
-										</requireActiveProfile>
 										<requireActiveProfile>
 											<message>"publish" requires "POST-SNAPSHOT" profile</message>
 											<profiles>POST-SNAPSHOT</profiles>
