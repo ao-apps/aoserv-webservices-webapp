@@ -281,7 +281,7 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 									<target>
 										<sleep seconds="10" />
 										<mkdir dir="${project.build.directory}/warmup-get-url" />
-										<retry retrycount="12" retrydelay="15">
+										<retry retrycount="12" retrydelay="15000">
 											<get
 												retries="1"
 												src="${publish-webservices.aoindustries.com-warmup-get-url}"
@@ -290,7 +290,7 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 												httpusecaches="false"
 											/>
 										</retry>
-										<retry retrycount="12" retrydelay="15">
+										<retry retrycount="12" retrydelay="15000">
 											<get
 												retries="1"
 												src="${publish-webservices.aoindustries.com-warmup-get-url.2}"
