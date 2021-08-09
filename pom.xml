@@ -29,7 +29,7 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 		<relativePath>../../oss/parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.aoindustries</groupId><artifactId>aoserv-webservices-webapp</artifactId><version>1.85.0-POST-SNAPSHOT</version>
+	<groupId>com.aoindustries</groupId><artifactId>aoserv-webservices-webapp</artifactId><version>1.86.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -307,11 +307,11 @@ along with aoserv-webservices-webapp.  If not, see <http://www.gnu.org/licenses 
 		<dependencies>
 			<!-- Non-classpath Direct -->
 			<dependency>
-				<groupId>org.apache.axis2</groupId><artifactId>axis2-webapp</artifactId><version>1.7.9</version>
+				<groupId>org.apache.axis2</groupId><artifactId>axis2-webapp</artifactId><version>1.8.0</version>
 				<type>war</type>
 			</dependency>
 			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>aoserv-webservices</artifactId><version>1.85.0${POST-SNAPSHOT}</version>
+				<groupId>com.aoindustries</groupId><artifactId>aoserv-webservices</artifactId><version>1.86.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 				<type>aar</type>
 				<exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
 			</dependency>
