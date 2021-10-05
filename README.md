@@ -1,4 +1,4 @@
-# [<img src="ao-logo.png" alt="AO Logo" width="35" height="40">](https://github.com/aoindustries) [AOServ](https://aoindustries.com/aoserv/) / [Webservices](https://github.com/aoindustries/aoserv-webservices) / [Webapp](https://github.com/aoindustries/aoserv-webservices-webapp)
+# [<img src="ao-logo.png" alt="AO Logo" width="35" height="40">](https://github.com/ao-apps) [AOServ](https://aoindustries.com/aoserv/) / [Webservices](https://github.com/ao-apps/aoserv-webservices) / [Webapp](https://github.com/ao-apps/aoserv-webservices-webapp)
 
 [![project: alpha](https://aoindustries.com/ao-badges/project-alpha.svg)](https://aoindustries.com/life-cycle#project-alpha)
 [![management: preview](https://aoindustries.com/ao-badges/management-preview.svg)](https://aoindustries.com/life-cycle#management-preview)
@@ -7,7 +7,7 @@
 [![java ee: &gt;= 7](https://aoindustries.com/ao-badges/javaee-7.svg)](https://docs.oracle.com/javaee/7/api/)
 [![license: LGPL v3](https://aoindustries.com/ao-badges/license-lgpl-3.0.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 
-[![Build](https://github.com/aoindustries/aoserv-webservices-webapp/workflows/Build/badge.svg?branch=master)](https://github.com/aoindustries/aoserv-webservices-webapp/actions?query=workflow%3ABuild)
+[![Build](https://github.com/ao-apps/aoserv-webservices-webapp/workflows/Build/badge.svg?branch=master)](https://github.com/ao-apps/aoserv-webservices-webapp/actions?query=workflow%3ABuild)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.aoindustries/aoserv-webservices-webapp/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.aoindustries/aoserv-webservices-webapp)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps.platform%3Aaoapps-webservices-webapp&metric=alert_status)](https://sonarcloud.io/dashboard?branch=master&id=com.aoapps.platform%3Aaoapps-webservices-webapp)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps.platform%3Aaoapps-webservices-webapp&metric=ncloc)](https://sonarcloud.io/component_measures?branch=master&id=com.aoapps.platform%3Aaoapps-webservices-webapp&metric=ncloc)  
@@ -21,7 +21,7 @@ The Axis2-based [AOServ Platform](https://aoindustries.com/aoserv/) web services
 * [Project Home](https://aoindustries.com/aoserv/webservices/webapp/)
 * [Changelog](https://aoindustries.com/aoserv/webservices/webapp/changelog)
 * [Maven Central Repository](https://search.maven.org/artifact/com.aoindustries/aoserv-webservices-webapp)
-* [GitHub](https://github.com/aoindustries/aoserv-webservices-webapp)
+* [GitHub](https://github.com/ao-apps/aoserv-webservices-webapp)
 
 ## Contact Us
 For questions or support, please [contact us](https://aoindustries.com/contact):
