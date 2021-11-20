@@ -34,7 +34,10 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
 
 	<properties>
 		<module.name>com.aoindustries.aoserv.webservices.webapp</module.name>
-		<!-- Stay on Java 1.8 since Axis fails with "Error looking for paramter names in bytecode: unexpected bytes in file". -->
+		<!--
+			Stay on Java 1.8 since Axis fails with "Error looking for paramter names in bytecode: unexpected bytes in file".
+			TODO: This problem might be only an issue with Lambdas.  Review other webservices projects.
+		-->
 		<javase.version>1.8</javase.version>
 		<javase.release>8</javase.release>
 		<javadoc.link.javase>${javadoc.link.javase.8}</javadoc.link.javase>
@@ -95,9 +98,15 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
 	</issueManagement>
 
 	<ciManagement>
+		<system>Jenkins</system>
+		<url>https://jenkins.aoindustries.com/job/ao/job/aoserv/job/webservices-webapp/</url>
+	</ciManagement>
+	<!-- Only one allowed in POM:
+	<ciManagement>
 		<system>GitHub Actions</system>
 		<url>https://github.com/ao-apps/aoserv-webservices-webapp/actions</url>
 	</ciManagement>
+	-->
 
 	<repositories>
 		<!-- Repository required here, too, so can find parent -->
@@ -188,13 +197,7 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
 					</overlays>
 				</configuration>
 			</plugin>
-			<!-- Never attach sources for snapshot, see https://stackoverflow.com/a/39139979 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-source-plugin</artifactId>
-				<configuration><skipSource>${build.isSnapshot}</skipSource></configuration>
-			</plugin>
-			<!-- TODO: Use install-file for pom and javadocs only? -->
-			<!-- Never deploy snapshot, see https://stackoverflow.com/a/39139979 -->
+			<!-- Do not deploy snapshot (unless "jenkins" profile below), see https://stackoverflow.com/a/39139979 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-deploy-plugin</artifactId>
 				<configuration><skip>${build.isSnapshot}</skip></configuration>
@@ -225,15 +228,17 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
 				</plugins>
 			</build>
 		</profile>
-		<!--
-			Required for bug "requireActiveProfile ignores inherited profiles in submodules":
-			https://issues.apache.org/jira/browse/MENFORCER-226
-		-->
 		<profile>
-			<id>POST-SNAPSHOT</id>
-			<properties>
-				<POST-SNAPSHOT>-POST-SNAPSHOT</POST-SNAPSHOT>
-			</properties>
+			<id>jenkins</id>
+			<build>
+				<plugins>
+					<!-- Always deploy Jenkins builds -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-deploy-plugin</artifactId>
+						<configuration><skip>false</skip></configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 		<profile>
 			<id>publish</id>
@@ -246,10 +251,6 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
 								<id>require-publish-properties</id><goals><goal>enforce</goal></goals>
 								<configuration>
 									<rules>
-										<requireActiveProfile>
-											<message>"publish" requires "POST-SNAPSHOT" profile</message>
-											<profiles>POST-SNAPSHOT</profiles>
-										</requireActiveProfile>
 										<requireSnapshotVersion>
 											<message>Releases may not include Axis2 username and password.</message>
 										</requireSnapshotVersion>
@@ -283,10 +284,22 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
 										<sleep seconds="10" />
 										<mkdir dir="${project.build.directory}/warmup-get-url" />
 										<retry retrycount="12" retrydelay="15000">
-											<get retries="1" src="${publish-webservices.aoindustries.com-warmup-get-url}" dest="${project.build.directory}/warmup-get-url/response" maxtime="120" httpusecaches="false" />
+											<get
+												retries="1"
+												src="${publish-webservices.aoindustries.com-warmup-get-url}"
+												dest="${project.build.directory}/warmup-get-url/response"
+												maxtime="120"
+												httpusecaches="false"
+											/>
 										</retry>
 										<retry retrycount="12" retrydelay="15000">
-											<get retries="1" src="${publish-webservices.aoindustries.com-warmup-get-url.2}" dest="${project.build.directory}/warmup-get-url/response.2" maxtime="120" httpusecaches="false" />
+											<get
+												retries="1"
+												src="${publish-webservices.aoindustries.com-warmup-get-url.2}"
+												dest="${project.build.directory}/warmup-get-url/response.2"
+												maxtime="120"
+												httpusecaches="false"
+											/>
 										</retry>
 									</target>
 								</configuration>
