@@ -55,6 +55,9 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
 		<sonar.projectKey>com.aoapps.platform:aoapps-webservices-webapp<!-- TODO: ${project.groupId}:${project.artifactId} --></sonar.projectKey>
 		<sonar.organization>ao-apps</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<!-- Default publish settings -->
+		<publish-webservices.aoindustries.com-warmup-get-url>https://webservices.aoindustries.com/services/listServices</publish-webservices.aoindustries.com-warmup-get-url>
+		<publish-webservices.aoindustries.com-warmup-get-url.2>https://webservices.aoindustries.com/services/AOServService_v1_0?wsdl</publish-webservices.aoindustries.com-warmup-get-url.2>
 	</properties>
 
 	<name>AOServ Webservices Webapp</name>
