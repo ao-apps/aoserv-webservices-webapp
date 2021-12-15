@@ -132,6 +132,11 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
 				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
 				<configuration>
 					<ignoredUnusedDeclaredDependencies>
+						<!-- Runtime Direct -->
+						<!-- Mitigate CVE-2021-44228 -->
+						<dependency>org.apache.logging.log4j:log4j-api</dependency>
+						<dependency>org.apache.logging.log4j:log4j-core</dependency>
+						<dependency>org.apache.logging.log4j:log4j-jcl</dependency>
 						<!-- Non-classpath Direct -->
 						<dependency>org.apache.axis2:axis2-webapp:war</dependency>
 						<dependency>com.aoindustries:aoserv-webservices:aar</dependency>
@@ -192,6 +197,10 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
 								<exclude>WEB-INF/conf/axis2.xml</exclude>
 								<exclude>WEB-INF/services/services.list</exclude>
 								<exclude>WEB-INF/web.xml</exclude>
+								<!-- Mitigate CVE-2021-44228 -->
+								<exclude>WEB-INF/lib/log4j-api-*.jar</exclude>
+								<exclude>WEB-INF/lib/log4j-core-*.jar</exclude>
+								<exclude>WEB-INF/lib/log4j-jcl-*.jar</exclude>
 								<!-- Avoid information disclosure -->
 								<exclude>WEB-INF/services/version*.aar</exclude>
 								<exclude>axis2-web/HappyAxis.jsp</exclude>
@@ -304,6 +313,17 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- Runtime Direct -->
+			<!-- Mitigate CVE-2021-44228 -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId><artifactId>log4j-api</artifactId><version>2.16.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId><artifactId>log4j-core</artifactId><version>2.16.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId><artifactId>log4j-jcl</artifactId><version>2.16.0</version>
+			</dependency>
 			<!-- Non-classpath Direct -->
 			<dependency>
 				<groupId>org.apache.axis2</groupId><artifactId>axis2-webapp</artifactId><version>1.8.0</version>
@@ -318,6 +338,20 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- Runtime Direct -->
+		<!-- Mitigate CVE-2021-44228 -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId><artifactId>log4j-api</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId><artifactId>log4j-core</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId><artifactId>log4j-jcl</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<!-- Non-classpath Direct -->
 		<dependency>
 			<groupId>org.apache.axis2</groupId><artifactId>axis2-webapp</artifactId>
