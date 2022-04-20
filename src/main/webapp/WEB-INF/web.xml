@@ -46,7 +46,7 @@
         <servlet-name>AxisAdminServlet</servlet-name>
         <servlet-class>org.apache.axis2.webapp.AxisAdminServlet</servlet-class>
     </servlet>
-    
+
     <!-- servlet>
         <display-name>SOAPMonitorService</display-name>
         <servlet-name>SOAPMonitorService</servlet-name>
@@ -61,7 +61,7 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet -->
-    
+
     <servlet-mapping>
         <servlet-name>AxisServlet</servlet-name>
         <url-pattern>/servlet/AxisServlet</url-pattern>
@@ -86,7 +86,7 @@
         <servlet-name>SOAPMonitorService</servlet-name>
         <url-pattern>/SOAPMonitor</url-pattern>
     </servlet-mapping -->
-    
+
     <mime-mapping>
         <extension>inc</extension>
         <mime-type>text/plain</mime-type>

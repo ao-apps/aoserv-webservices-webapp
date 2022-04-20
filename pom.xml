@@ -22,346 +22,346 @@ You should have received a copy of the GNU Lesser General Public License
 along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.aoapps</groupId><artifactId>ao-oss-parent</artifactId><version>1.18.0-SNAPSHOT</version>
-		<relativePath>../../oss/parent/pom.xml</relativePath>
-	</parent>
+  <parent>
+    <groupId>com.aoapps</groupId><artifactId>ao-oss-parent</artifactId><version>1.18.0-SNAPSHOT</version>
+    <relativePath>../../oss/parent/pom.xml</relativePath>
+  </parent>
 
-	<groupId>com.aoindustries</groupId><artifactId>aoserv-webservices-webapp</artifactId><version>1.86.0-POST-SNAPSHOT</version>
-	<packaging>war</packaging>
+  <groupId>com.aoindustries</groupId><artifactId>aoserv-webservices-webapp</artifactId><version>1.86.0-POST-SNAPSHOT</version>
+  <packaging>war</packaging>
 
-	<properties>
-		<module.name>com.aoindustries.aoserv.webservices.webapp</module.name>
-		<!--
-			Stay on Java 1.8 since Axis fails with "Error looking for paramter names in bytecode: unexpected bytes in file".
-			TODO: This problem might be only an issue with Lambdas.  Review other webservices projects.
-		-->
-		<javase.version>1.8</javase.version>
-		<javase.release>8</javase.release>
-		<javadoc.link.javase>${javadoc.link.javase.8}</javadoc.link.javase>
-		<!-- This must be set in your ~/.m2/settings.xml when building with JDK < 9 -->
-		<javase.bootclasspath>${javase.bootclasspath.8}</javase.bootclasspath>
+  <properties>
+    <module.name>com.aoindustries.aoserv.webservices.webapp</module.name>
+    <!--
+      Stay on Java 1.8 since Axis fails with "Error looking for paramter names in bytecode: unexpected bytes in file".
+      TODO: This problem might be only an issue with Lambdas.  Review other webservices projects.
+    -->
+    <javase.version>1.8</javase.version>
+    <javase.release>8</javase.release>
+    <javadoc.link.javase>${javadoc.link.javase.8}</javadoc.link.javase>
+    <!-- This must be set in your ~/.m2/settings.xml when building with JDK < 9 -->
+    <javase.bootclasspath>${javase.bootclasspath.8}</javase.bootclasspath>
 
-		<description.html><![CDATA[The Axis2-based <a target="${javadoc.target}" href="https://aoindustries.com/aoserv/">AOServ Platform</a> web services webapp.]]></description.html>
-		<!-- TODO: Remove once moved to platform.aoapps.com -->
-		<google.analytics.trackingId>UA-86871646-1</google.analytics.trackingId>
-		<!-- com.aoindustries is on original Sonatype Nexus Repository Manager -->
-		<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-		<!-- Never stage snapshot, see https://stackoverflow.com/a/39139979 -->
-		<nexus.skipNexusStagingDeployMojo>${build.isSnapshot}</nexus.skipNexusStagingDeployMojo>
-		<!-- SonarQube -->
-		<sonar.projectKey>com.aoapps.platform:aoapps-webservices-webapp<!-- TODO: ${project.groupId}:${project.artifactId} --></sonar.projectKey>
-		<sonar.organization>ao-apps</sonar.organization>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<!-- Default publish settings -->
-		<publish-webservices.aoindustries.com-warmup-get-url>https://webservices.aoindustries.com/services/listServices</publish-webservices.aoindustries.com-warmup-get-url>
-		<publish-webservices.aoindustries.com-warmup-get-url.2>https://webservices.aoindustries.com/services/AOServService_v1_0?wsdl</publish-webservices.aoindustries.com-warmup-get-url.2>
-	</properties>
+    <description.html><![CDATA[The Axis2-based <a target="${javadoc.target}" href="https://aoindustries.com/aoserv/">AOServ Platform</a> web services webapp.]]></description.html>
+    <!-- TODO: Remove once moved to platform.aoapps.com -->
+    <google.analytics.trackingId>UA-86871646-1</google.analytics.trackingId>
+    <!-- com.aoindustries is on original Sonatype Nexus Repository Manager -->
+    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+    <!-- Never stage snapshot, see https://stackoverflow.com/a/39139979 -->
+    <nexus.skipNexusStagingDeployMojo>${build.isSnapshot}</nexus.skipNexusStagingDeployMojo>
+    <!-- SonarQube -->
+    <sonar.projectKey>com.aoapps.platform:aoapps-webservices-webapp<!-- TODO: ${project.groupId}:${project.artifactId} --></sonar.projectKey>
+    <sonar.organization>ao-apps</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <!-- Default publish settings -->
+    <publish-webservices.aoindustries.com-warmup-get-url>https://webservices.aoindustries.com/services/listServices</publish-webservices.aoindustries.com-warmup-get-url>
+    <publish-webservices.aoindustries.com-warmup-get-url.2>https://webservices.aoindustries.com/services/AOServService_v1_0?wsdl</publish-webservices.aoindustries.com-warmup-get-url.2>
+  </properties>
 
-	<name>AOServ Webservices Webapp</name>
-	<url>https://aoindustries.com/aoserv/webservices/webapp/</url>
-	<description>SOAP web services for the AOServ Platform.</description>
-	<inceptionYear>2009</inceptionYear>
+  <name>AOServ Webservices Webapp</name>
+  <url>https://aoindustries.com/aoserv/webservices/webapp/</url>
+  <description>SOAP web services for the AOServ Platform.</description>
+  <inceptionYear>2009</inceptionYear>
 
-	<licenses>
-		<license>
-			<name>GNU General Lesser Public License (LGPL) version 3.0</name>
-			<url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+  <licenses>
+    <license>
+      <name>GNU General Lesser Public License (LGPL) version 3.0</name>
+      <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
-	<organization>
-		<name>AO Industries, Inc.</name>
-		<url>https://aoindustries.com/</url>
-	</organization>
+  <organization>
+    <name>AO Industries, Inc.</name>
+    <url>https://aoindustries.com/</url>
+  </organization>
 
-	<developers>
-		<developer>
-			<name>AO Industries, Inc.</name>
-			<email>support@aoindustries.com</email>
-			<url>https://aoindustries.com/</url>
-			<organization>AO Industries, Inc.</organization>
-			<organizationUrl>https://aoindustries.com/</organizationUrl>
-		</developer>
-	</developers>
+  <developers>
+    <developer>
+      <name>AO Industries, Inc.</name>
+      <email>support@aoindustries.com</email>
+      <url>https://aoindustries.com/</url>
+      <organization>AO Industries, Inc.</organization>
+      <organizationUrl>https://aoindustries.com/</organizationUrl>
+    </developer>
+  </developers>
 
-	<scm>
-		<connection>scm:git:git://github.com/ao-apps/aoserv-webservices-webapp.git</connection>
-		<developerConnection>scm:git:git@github.com:ao-apps/aoserv-webservices-webapp.git</developerConnection>
-		<url>https://github.com/ao-apps/aoserv-webservices-webapp</url>
-		<tag>HEAD</tag>
-	</scm>
+  <scm>
+    <connection>scm:git:git://github.com/ao-apps/aoserv-webservices-webapp.git</connection>
+    <developerConnection>scm:git:git@github.com:ao-apps/aoserv-webservices-webapp.git</developerConnection>
+    <url>https://github.com/ao-apps/aoserv-webservices-webapp</url>
+    <tag>HEAD</tag>
+  </scm>
 
-	<issueManagement>
-		<system>GitHub Issues</system>
-		<url>https://github.com/ao-apps/aoserv-webservices-webapp/issues</url>
-	</issueManagement>
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/ao-apps/aoserv-webservices-webapp/issues</url>
+  </issueManagement>
 
-	<ciManagement>
-		<system>Jenkins</system>
-		<url>https://jenkins.aoindustries.com/job/ao/job/aoserv/job/webservices-webapp/</url>
-	</ciManagement>
-	<!-- Only one allowed in POM:
-	<ciManagement>
-		<system>GitHub Actions</system>
-		<url>https://github.com/ao-apps/aoserv-webservices-webapp/actions</url>
-	</ciManagement>
-	-->
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>https://jenkins.aoindustries.com/job/ao/job/aoserv/job/webservices-webapp/</url>
+  </ciManagement>
+  <!-- Only one allowed in POM:
+  <ciManagement>
+    <system>GitHub Actions</system>
+    <url>https://github.com/ao-apps/aoserv-webservices-webapp/actions</url>
+  </ciManagement>
+  -->
 
-	<repositories>
-		<!-- Repository required here, too, so can find parent -->
-		<repository>
-			<id>sonatype-nexus-snapshots-s01</id>
-			<name>Sonatype Nexus Snapshots S01</name>
-			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</repository>
-	</repositories>
+  <repositories>
+    <!-- Repository required here, too, so can find parent -->
+    <repository>
+      <id>sonatype-nexus-snapshots-s01</id>
+      <name>Sonatype Nexus Snapshots S01</name>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <checksumPolicy>fail</checksumPolicy>
+      </snapshots>
+    </repository>
+  </repositories>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
-				<configuration>
-					<ignoredUnusedDeclaredDependencies>
-						<!-- Runtime Direct -->
-						<!-- Mitigate CVE-2021-44228 -->
-						<dependency>org.apache.logging.log4j:log4j-api</dependency>
-						<dependency>org.apache.logging.log4j:log4j-core</dependency>
-						<dependency>org.apache.logging.log4j:log4j-jcl</dependency>
-						<!-- Non-classpath Direct -->
-						<dependency>org.apache.axis2:axis2-webapp:war</dependency>
-						<dependency>com.aoindustries:aoserv-webservices:aar</dependency>
-					</ignoredUnusedDeclaredDependencies>
-				</configuration>
-			</plugin>
-			<!-- Java 1.8: see https://maven.apache.org/plugins/maven-compiler-plugin/examples/module-info.html -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId>
-				<executions>
-					<!-- compile everything to ensure module-info contains right entries -->
-					<execution>
-						<id>default-compile</id>
-						<configuration>
-							<release>9</release>
-						</configuration>
-					</execution>
-					<!-- recompile everything for target VM except the module-info.java -->
-					<!-- module-info.java only:
-					<execution>
-						<id>base-compile</id><goals><goal>compile</goal></goals>
-						<configuration>
-							<excludes>
-								<exclude>module-info.java</exclude>
-							</excludes>
-						</configuration>
-					</execution>
-					-->
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<!-- Java 1.8: generate future-proof modular javadocs -->
-					<source>11</source>
-					<release>11</release>
-				</configuration>
-			</plugin>
-			<!-- Seems to not be required.  The aar file is still correctly put in WEB-INF/services:
-			<plugin>
-				<groupId>org.apache.axis2</groupId><artifactId>axis2-aar-maven-plugin</artifactId>
-				<extensions>true</extensions>
-			</plugin>
-			-->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<overlays>
-						<overlay>
-							<groupId>org.apache.axis2</groupId><artifactId>axis2-webapp</artifactId>
-							<excludes>
-								<!--
-									For safety, excluding explicitly, no depending on overlay default settings.  This
-									way, if we accidentally move one of these files in the source, we won't accidentally
-									revert to a default password.
-								-->
-								<exclude>META-INF/**</exclude>
-								<exclude>WEB-INF/conf/axis2.xml</exclude>
-								<exclude>WEB-INF/services/services.list</exclude>
-								<exclude>WEB-INF/web.xml</exclude>
-								<!-- Mitigate CVE-2021-44228 -->
-								<exclude>WEB-INF/lib/log4j-api-*.jar</exclude>
-								<exclude>WEB-INF/lib/log4j-core-*.jar</exclude>
-								<exclude>WEB-INF/lib/log4j-jcl-*.jar</exclude>
-								<!-- Avoid information disclosure -->
-								<exclude>WEB-INF/services/version*.aar</exclude>
-								<exclude>axis2-web/HappyAxis.jsp</exclude>
-							</excludes>
-						</overlay>
-					</overlays>
-				</configuration>
-			</plugin>
-			<!-- Do not deploy snapshot (unless "jenkins" profile below), see https://stackoverflow.com/a/39139979 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-deploy-plugin</artifactId>
-				<configuration><skip>${build.isSnapshot}</skip></configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
+        <configuration>
+          <ignoredUnusedDeclaredDependencies>
+            <!-- Runtime Direct -->
+            <!-- Mitigate CVE-2021-44228 -->
+            <dependency>org.apache.logging.log4j:log4j-api</dependency>
+            <dependency>org.apache.logging.log4j:log4j-core</dependency>
+            <dependency>org.apache.logging.log4j:log4j-jcl</dependency>
+            <!-- Non-classpath Direct -->
+            <dependency>org.apache.axis2:axis2-webapp:war</dependency>
+            <dependency>com.aoindustries:aoserv-webservices:aar</dependency>
+          </ignoredUnusedDeclaredDependencies>
+        </configuration>
+      </plugin>
+      <!-- Java 1.8: see https://maven.apache.org/plugins/maven-compiler-plugin/examples/module-info.html -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId>
+        <executions>
+          <!-- compile everything to ensure module-info contains right entries -->
+          <execution>
+            <id>default-compile</id>
+            <configuration>
+              <release>9</release>
+            </configuration>
+          </execution>
+          <!-- recompile everything for target VM except the module-info.java -->
+          <!-- module-info.java only:
+          <execution>
+            <id>base-compile</id><goals><goal>compile</goal></goals>
+            <configuration>
+              <excludes>
+                <exclude>module-info.java</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+          -->
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <!-- Java 1.8: generate future-proof modular javadocs -->
+          <source>11</source>
+          <release>11</release>
+        </configuration>
+      </plugin>
+      <!-- Seems to not be required.  The aar file is still correctly put in WEB-INF/services:
+      <plugin>
+        <groupId>org.apache.axis2</groupId><artifactId>axis2-aar-maven-plugin</artifactId>
+        <extensions>true</extensions>
+      </plugin>
+      -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <overlays>
+            <overlay>
+              <groupId>org.apache.axis2</groupId><artifactId>axis2-webapp</artifactId>
+              <excludes>
+                <!--
+                  For safety, excluding explicitly, no depending on overlay default settings.  This
+                  way, if we accidentally move one of these files in the source, we won't accidentally
+                  revert to a default password.
+                -->
+                <exclude>META-INF/**</exclude>
+                <exclude>WEB-INF/conf/axis2.xml</exclude>
+                <exclude>WEB-INF/services/services.list</exclude>
+                <exclude>WEB-INF/web.xml</exclude>
+                <!-- Mitigate CVE-2021-44228 -->
+                <exclude>WEB-INF/lib/log4j-api-*.jar</exclude>
+                <exclude>WEB-INF/lib/log4j-core-*.jar</exclude>
+                <exclude>WEB-INF/lib/log4j-jcl-*.jar</exclude>
+                <!-- Avoid information disclosure -->
+                <exclude>WEB-INF/services/version*.aar</exclude>
+                <exclude>axis2-web/HappyAxis.jsp</exclude>
+              </excludes>
+            </overlay>
+          </overlays>
+        </configuration>
+      </plugin>
+      <!-- Do not deploy snapshot (unless "jenkins" profile below), see https://stackoverflow.com/a/39139979 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-deploy-plugin</artifactId>
+        <configuration><skip>${build.isSnapshot}</skip></configuration>
+      </plugin>
+    </plugins>
+  </build>
 
-	<profiles>
-		<profile>
-			<id>development</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-enforcer-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>require-development-properties</id><goals><goal>enforce</goal></goals>
-								<configuration>
-									<rules>
-										<requireSnapshotVersion>
-											<message>Releases may not include Axis2 username and password.</message>
-										</requireSnapshotVersion>
-									</rules>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>publish</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-enforcer-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>require-publish-properties</id><goals><goal>enforce</goal></goals>
-								<configuration>
-									<rules>
-										<requireSnapshotVersion>
-											<message>Releases may not include Axis2 username and password.</message>
-										</requireSnapshotVersion>
-									</rules>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.tomcat.maven</groupId><artifactId>tomcat7-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>publish</id><phase>deploy</phase><goals><goal>deploy-only</goal></goals>
-								<configuration>
-									<charset>UTF-8</charset>
-									<server>tomcat7-maven-plugin-webservices.aoindustries.com</server>
-									<path>/</path>
-									<update>true</update>
-									<url>${tomcat7-maven-plugin-webservices.aoindustries.com}</url>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-antrun-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>warmup-get-url</id><phase>deploy</phase><goals><goal>run</goal></goals>
-								<configuration>
-									<target>
-										<sleep seconds="10" />
-										<mkdir dir="${project.build.directory}/warmup-get-url" />
-										<retry retrycount="12" retrydelay="15000">
-											<get
-												retries="1"
-												src="${publish-webservices.aoindustries.com-warmup-get-url}"
-												dest="${project.build.directory}/warmup-get-url/response"
-												maxtime="120"
-												httpusecaches="false"
-											/>
-										</retry>
-										<retry retrycount="12" retrydelay="15000">
-											<get
-												retries="1"
-												src="${publish-webservices.aoindustries.com-warmup-get-url.2}"
-												dest="${project.build.directory}/warmup-get-url/response.2"
-												maxtime="120"
-												httpusecaches="false"
-											/>
-										</retry>
-									</target>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+  <profiles>
+    <profile>
+      <id>development</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId><artifactId>maven-enforcer-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>require-development-properties</id><goals><goal>enforce</goal></goals>
+                <configuration>
+                  <rules>
+                    <requireSnapshotVersion>
+                      <message>Releases may not include Axis2 username and password.</message>
+                    </requireSnapshotVersion>
+                  </rules>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>publish</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId><artifactId>maven-enforcer-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>require-publish-properties</id><goals><goal>enforce</goal></goals>
+                <configuration>
+                  <rules>
+                    <requireSnapshotVersion>
+                      <message>Releases may not include Axis2 username and password.</message>
+                    </requireSnapshotVersion>
+                  </rules>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.tomcat.maven</groupId><artifactId>tomcat7-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>publish</id><phase>deploy</phase><goals><goal>deploy-only</goal></goals>
+                <configuration>
+                  <charset>UTF-8</charset>
+                  <server>tomcat7-maven-plugin-webservices.aoindustries.com</server>
+                  <path>/</path>
+                  <update>true</update>
+                  <url>${tomcat7-maven-plugin-webservices.aoindustries.com}</url>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId><artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>warmup-get-url</id><phase>deploy</phase><goals><goal>run</goal></goals>
+                <configuration>
+                  <target>
+                    <sleep seconds="10" />
+                    <mkdir dir="${project.build.directory}/warmup-get-url" />
+                    <retry retrycount="12" retrydelay="15000">
+                      <get
+                        retries="1"
+                        src="${publish-webservices.aoindustries.com-warmup-get-url}"
+                        dest="${project.build.directory}/warmup-get-url/response"
+                        maxtime="120"
+                        httpusecaches="false"
+                      />
+                    </retry>
+                    <retry retrycount="12" retrydelay="15000">
+                      <get
+                        retries="1"
+                        src="${publish-webservices.aoindustries.com-warmup-get-url.2}"
+                        dest="${project.build.directory}/warmup-get-url/response.2"
+                        maxtime="120"
+                        httpusecaches="false"
+                      />
+                    </retry>
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
-	<dependencyManagement>
-		<dependencies>
-			<!-- Runtime Direct -->
-			<!-- Mitigate CVE-2021-44228 -->
-			<dependency>
-				<groupId>org.apache.logging.log4j</groupId><artifactId>log4j-api</artifactId><version>2.17.2</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.logging.log4j</groupId><artifactId>log4j-core</artifactId><version>2.17.2</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.logging.log4j</groupId><artifactId>log4j-jcl</artifactId><version>2.17.2</version>
-			</dependency>
-			<!-- Non-classpath Direct -->
-			<dependency>
-				<groupId>org.apache.axis2</groupId><artifactId>axis2-webapp</artifactId><version>1.8.0</version>
-				<type>war</type>
-			</dependency>
-			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>aoserv-webservices</artifactId><version>1.86.0${POST-SNAPSHOT}</version>
-				<type>aar</type>
-				<exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+  <dependencyManagement>
+    <dependencies>
+      <!-- Runtime Direct -->
+      <!-- Mitigate CVE-2021-44228 -->
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId><artifactId>log4j-api</artifactId><version>2.17.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId><artifactId>log4j-core</artifactId><version>2.17.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId><artifactId>log4j-jcl</artifactId><version>2.17.2</version>
+      </dependency>
+      <!-- Non-classpath Direct -->
+      <dependency>
+        <groupId>org.apache.axis2</groupId><artifactId>axis2-webapp</artifactId><version>1.8.0</version>
+        <type>war</type>
+      </dependency>
+      <dependency>
+        <groupId>com.aoindustries</groupId><artifactId>aoserv-webservices</artifactId><version>1.86.0${POST-SNAPSHOT}</version>
+        <type>aar</type>
+        <exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
-	<dependencies>
-		<!-- Runtime Direct -->
-		<!-- Mitigate CVE-2021-44228 -->
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId><artifactId>log4j-api</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId><artifactId>log4j-core</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId><artifactId>log4j-jcl</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<!-- Non-classpath Direct -->
-		<dependency>
-			<groupId>org.apache.axis2</groupId><artifactId>axis2-webapp</artifactId>
-			<type>war</type>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.aoindustries</groupId><artifactId>aoserv-webservices</artifactId>
-			<type>aar</type>
-			<scope>runtime</scope>
-		</dependency>
-	</dependencies>
+  <dependencies>
+    <!-- Runtime Direct -->
+    <!-- Mitigate CVE-2021-44228 -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId><artifactId>log4j-api</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId><artifactId>log4j-core</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId><artifactId>log4j-jcl</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- Non-classpath Direct -->
+    <dependency>
+      <groupId>org.apache.axis2</groupId><artifactId>axis2-webapp</artifactId>
+      <type>war</type>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.aoindustries</groupId><artifactId>aoserv-webservices</artifactId>
+      <type>aar</type>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
 </project>
