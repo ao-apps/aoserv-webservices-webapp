@@ -1,6 +1,6 @@
 /*
  * aoserv-webservices-webapp - The Axis2-based AOServ Platform web services webapp.
- * Copyright (C) 2021  AO Industries, Inc.
+ * Copyright (C) 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -21,4 +21,4 @@
  * along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses/>.
  */
 module com.aoindustries.aoserv.webservices.webapp {
-}
+} // TODO: Avoiding rewrite-maven-plugin-4.22.2 truncation
