@@ -318,7 +318,7 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
       </dependency>
       <!-- Non-classpath Direct -->
       <dependency>
-        <groupId>com.aoindustries</groupId><artifactId>aoserv-webservices</artifactId><version>1.91.4-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+        <groupId>com.aoindustries</groupId><artifactId>aoserv-webservices</artifactId><version>1.91.4${POST-SNAPSHOT}</version>
         <type>aar</type>
         <exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
       </dependency>
