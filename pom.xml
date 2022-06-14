@@ -25,7 +25,7 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.aoapps</groupId><artifactId>ao-oss-parent</artifactId><version>1.19.2<!-- -POST-SNAPSHOT --></version>
+    <groupId>com.aoapps</groupId><artifactId>ao-oss-parent</artifactId><version>1.19.2-POST-SNAPSHOT</version>
     <relativePath>../../oss/parent/pom.xml</relativePath>
   </parent>
 
@@ -318,7 +318,7 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
       </dependency>
       <!-- Non-classpath Direct -->
       <dependency>
-        <groupId>com.aoindustries</groupId><artifactId>aoserv-webservices</artifactId><version>1.91.4<!-- ${POST-SNAPSHOT} --></version>
+        <groupId>com.aoindustries</groupId><artifactId>aoserv-webservices</artifactId><version>1.91.4${POST-SNAPSHOT}</version>
         <type>aar</type>
         <exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
       </dependency>
