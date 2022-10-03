@@ -193,7 +193,7 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
                   way, if we accidentally move one of these files in the source, we won't accidentally
                   revert to a default password.
                 -->
-                <exclude>META-INF/**</exclude>
+                <exclude>META-INF/</exclude>
                 <exclude>WEB-INF/conf/axis2.xml</exclude>
                 <exclude>WEB-INF/services/services.list</exclude>
                 <exclude>WEB-INF/web.xml</exclude>
