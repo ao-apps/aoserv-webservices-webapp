@@ -20,7 +20,7 @@ The Axis2-based [AOServ Platform](https://aoindustries.com/aoserv/) web services
 ## Project Links
 * [Project Home](https://aoindustries.com/aoserv/webservices/webapp/)
 * [Changelog](https://aoindustries.com/aoserv/webservices/webapp/changelog)
-* [Maven Central Repository](https://search.maven.org/artifact/com.aoindustries/aoserv-webservices-webapp)
+* [Maven Central Repository](https://central.sonatype.com/search?namespace=com.aoindustries&q=a%3Aaoserv-webservices-webapp)
 * [GitHub](https://github.com/ao-apps/aoserv-webservices-webapp)
 
 ## Contact Us
