@@ -55,6 +55,7 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
     <!-- SonarQube -->
     <sonar.projectKey>com.aoapps.platform:aoapps-webservices-webapp<!-- TODO: ${project.groupId}:${project.artifactId} --></sonar.projectKey>
     <!-- Default publish settings -->
+    <publish-webservices.aoindustries.com-ssh-path>/usr/bin/ssh</publish-webservices.aoindustries.com-ssh-path>
     <publish-webservices.aoindustries.com-warmup-get-url>https://webservices.aoindustries.com/services/listServices</publish-webservices.aoindustries.com-warmup-get-url>
     <publish-webservices.aoindustries.com-warmup-get-url.2>https://webservices.aoindustries.com/services/AoservService_v1_0?wsdl</publish-webservices.aoindustries.com-warmup-get-url.2>
   </properties>
@@ -276,6 +277,20 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
           <plugin>
             <groupId>org.apache.maven.plugins</groupId><artifactId>maven-antrun-plugin</artifactId>
             <executions>
+              <execution>
+                <id>delete-tomcat-work</id><phase>deploy</phase><goals><goal>run</goal></goals>
+                <configuration>
+                  <target>
+                    <sleep seconds="1" />
+                    <exec executable="${publish-webservices.aoindustries.com-ssh-path}" failonerror="true">
+                      <arg value="-oControlPath=none" />
+                      <arg value="-T" />
+                      <arg value="${publish-webservices.aoindustries.com-tomcat-username}@${publish-webservices.aoindustries.com-tomcat-hostname}"/>
+                      <arg value="find '${publish-webservices.aoindustries.com-tomcat-work}' '(' -name '*.java' -or -name '*.class' ')' -delete" />
+                    </exec>
+                  </target>
+                </configuration>
+              </execution>
               <execution>
                 <id>warmup-sleep</id><phase>deploy</phase><goals><goal>run</goal></goals>
                 <configuration>
