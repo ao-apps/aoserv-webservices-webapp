@@ -128,12 +128,7 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
       <plugin>
         <groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
         <configuration>
-          <ignoredUnusedDeclaredDependencies>
-            <!-- Runtime Direct -->
-            <!-- Mitigate CVE-2021-44228 -->
-            <dependency>org.apache.logging.log4j:log4j-api</dependency>
-            <dependency>org.apache.logging.log4j:log4j-core</dependency>
-            <dependency>org.apache.logging.log4j:log4j-jcl</dependency>
+          <ignoredUnusedDeclaredDependencies combine.children="append">
             <!-- Non-classpath Direct -->
             <dependency>com.aoindustries:aoserv-webservices:aar</dependency>
             <dependency>org.apache.axis2:axis2-webapp:war</dependency>
