@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 aoserv-webservices-webapp - The Axis2-based AOServ Platform web services webapp.
-Copyright (C) 2021, 2022, 2023  AO Industries, Inc.
+Copyright (C) 2021, 2022, 2023, 2024  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -332,13 +332,13 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
       <!-- Runtime Direct -->
       <!-- Mitigate CVE-2021-44228 -->
       <dependency>
-        <groupId>org.apache.logging.log4j</groupId><artifactId>log4j-api</artifactId><version>2.22.0</version>
+        <groupId>org.apache.logging.log4j</groupId><artifactId>log4j-api</artifactId><version>2.22.1</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.logging.log4j</groupId><artifactId>log4j-core</artifactId><version>2.22.0</version>
+        <groupId>org.apache.logging.log4j</groupId><artifactId>log4j-core</artifactId><version>2.22.1</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.logging.log4j</groupId><artifactId>log4j-jcl</artifactId><version>2.22.0</version>
+        <groupId>org.apache.logging.log4j</groupId><artifactId>log4j-jcl</artifactId><version>2.22.1</version>
       </dependency>
       <!-- Runtime Transitive -->
       <dependency>
