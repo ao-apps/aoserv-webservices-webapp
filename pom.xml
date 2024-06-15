@@ -46,6 +46,7 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
 
     <description.html><![CDATA[The Axis2-based <a target="${javadoc.target}" href="https://aoindustries.com/aoserv/">AOServ Platform</a> web services webapp.]]></description.html>
     <!-- com.aoindustries is on original Sonatype Nexus Repository Manager -->
+    <nexusServerId>ossrh-aoindustries</nexusServerId>
     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
     <!-- Never stage snapshot, see https://stackoverflow.com/a/39139979 -->
     <nexus.skipNexusStagingDeployMojo>${build.isSnapshot}</nexus.skipNexusStagingDeployMojo>
