@@ -29,20 +29,13 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
     <relativePath>../../oss/parent/pom.xml</relativePath>
   </parent>
 
-  <groupId>com.aoindustries</groupId><artifactId>aoserv-webservices-webapp</artifactId><version>1.91.7-POST-SNAPSHOT</version>
+  <groupId>com.aoindustries</groupId><artifactId>aoserv-webservices-webapp</artifactId><version>1.92.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <properties>
     <!-- Must be set to ${git.commit.time} for snapshots or ISO 8601 timestamp for releases. -->
     <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>
     <module.name>com.aoindustries.aoserv.webservices.webapp</module.name>
-    <!--
-      Stay on Java 1.8 since Axis fails with "Error looking for paramter names in bytecode: unexpected bytes in file".
-      TODO: This problem might be only an issue with Lambdas.  Review other webservices projects.
-    -->
-    <javase.version>1.8</javase.version>
-    <javase.release>8</javase.release>
-    <javadoc.link.javase>${javadoc.link.javase.8}</javadoc.link.javase>
 
     <description.html><![CDATA[The Axis2-based <a target="${javadoc.target}" href="https://aoindustries.com/aoserv/">AOServ Platform</a> web services webapp.]]></description.html>
     <!-- com.aoindustries is on original Sonatype Nexus Repository Manager -->
@@ -137,38 +130,6 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
             <dependency>com.aoindustries:aoserv-webservices:aar</dependency>
             <dependency>org.apache.axis2:axis2-webapp:war</dependency>
           </ignoredUnusedDeclaredDependencies>
-        </configuration>
-      </plugin>
-      <!-- Java 1.8: see https://maven.apache.org/plugins/maven-compiler-plugin/examples/module-info.html -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId>
-        <executions>
-          <!-- compile everything to ensure module-info contains right entries -->
-          <execution>
-            <id>default-compile</id>
-            <configuration>
-              <release>9</release>
-            </configuration>
-          </execution>
-          <!-- recompile everything for target VM except the module-info.java -->
-          <!-- module-info.java only:
-          <execution>
-            <id>base-compile</id><goals><goal>compile</goal></goals>
-            <configuration>
-              <excludes>
-                <exclude>module-info.java</exclude>
-              </excludes>
-            </configuration>
-          </execution>
-          -->
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>
-          <!-- Java 1.8: generate future-proof modular javadocs -->
-          <source>11</source>
-          <release>11</release>
         </configuration>
       </plugin>
       <!-- Seems to not be required.  The aar file is still correctly put in WEB-INF/services:
@@ -347,7 +308,7 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
       </dependency>
       <!-- Non-classpath Direct -->
       <dependency>
-        <groupId>com.aoindustries</groupId><artifactId>aoserv-webservices</artifactId><version>1.91.7${POST-SNAPSHOT}</version>
+        <groupId>com.aoindustries</groupId><artifactId>aoserv-webservices</artifactId><version>1.92.1-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
         <type>aar</type>
         <exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
       </dependency>
