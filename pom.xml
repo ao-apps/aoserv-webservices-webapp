@@ -36,6 +36,9 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
     <!-- Must be set to ${git.commit.time} for snapshots or ISO 8601 timestamp for releases. -->
     <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>
     <module.name>com.aoindustries.aoserv.webservices.webapp</module.name>
+    <!-- Jakarta EE 10 -->
+    <javaee.version>10</javaee.version>
+    <javadoc.link.javaee>${javadoc.link.jakartaee.10}</javadoc.link.javaee>
 
     <description.html><![CDATA[The Axis2-based <a target="${javadoc.target}" href="https://aoindustries.com/aoserv/">AOServ Platform</a> web services webapp.]]></description.html>
     <!-- Never stage snapshot, see https://stackoverflow.com/a/39139979 -->
@@ -310,7 +313,7 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
         <exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
       </dependency>
       <dependency>
-        <groupId>org.apache.axis2</groupId><artifactId>axis2-webapp</artifactId><version>1.8.2</version>
+        <groupId>org.apache.axis2</groupId><artifactId>axis2-webapp</artifactId><version>2.0.0</version>
         <type>war</type>
       </dependency>
     </dependencies>

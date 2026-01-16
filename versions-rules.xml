@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 aoserv-webservices-webapp - The Axis2-based AOServ Platform web services webapp.
-Copyright (C) 2023, 2025  AO Industries, Inc.
+Copyright (C) 2023, 2025, 2026  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -31,14 +31,6 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
     <rule groupId="org.apache.logging.log4j" comparisonMethod="maven">
       <ignoreVersions>
         <ignoreVersion type="regex">.*-(alpha|beta)[0-9]*</ignoreVersion>
-      </ignoreVersions>
-    </rule>
-    <!--
-      Stay on axis2-1.* until switching from Java EE to Jakarta EE
-    -->
-    <rule groupId="org.apache.axis2" comparisonMethod="maven">
-      <ignoreVersions>
-        <ignoreVersion type="regex">2\.[0-9]+\.[0-9]+</ignoreVersion>
       </ignoreVersions>
     </rule>
   </rules>

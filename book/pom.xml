@@ -47,6 +47,9 @@ along with aoserv-webservices-webapp.  If not, see <https://www.gnu.org/licenses
     <documented.artifactId>aoserv-webservices-webapp</documented.artifactId>
     <documented.name>AOServ Webservices Webapp</documented.name>
     <documented.description>The Axis2-based AOServ Platform web services webapp.</documented.description>
+    <!-- Jakarta EE 10 -->
+    <documented.javaee.version>10</documented.javaee.version>
+    <documented.javadoc.link.javaee>${javadoc.link.jakartaee.10}</documented.javadoc.link.javaee>
 
     <description.html><![CDATA[Documentation for <a target="${javadoc.target}" href="${project.url}">${documented.name}</a> in <a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a> format.]]></description.html>
     <!-- SonarQube -->
