@@ -204,8 +204,11 @@
          with name="https" and specify the port parameter on both receivers.
          For more information, please have a look at the servlet transport documentation:
          http://axis.apache.org/axis2/java/core/docs/servlet-transport.html -->
-    <transportReceiver name="http"
-                       class="org.apache.axis2.transport.http.AxisServletListener"/>
+    <transportReceiver name="@{aoserv-webservices-webapp.axis2.receiver}"
+                       class="org.apache.axis2.transport.http.AxisServletListener">
+        <parameter name="port">@{aoserv-webservices-webapp.axis2.port}</parameter>
+        <parameter name="httpFrontendHostUrl">@{aoserv-webservices-webapp.axis2.httpFrontendHostUrl}</parameter>
+    </transportReceiver>
 
     <!--Uncomment if you want to have TCP transport support-->
     <!--transportReceiver name="tcp"
