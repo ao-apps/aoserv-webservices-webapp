@@ -33,6 +33,9 @@ def upstreamProjects = [
   '../oss/ant-tasks', // <groupId>com.aoapps</groupId><artifactId>ao-ant-tasks</artifactId>
   '../oss/checkstyle-config', // <groupId>com.aoapps</groupId><artifactId>ao-checkstyle-config</artifactId>
 
+  // Runtime Direct
+  '../oss/servlet-util', // <groupId>com.aoapps</groupId><artifactId>ao-servlet-util</artifactId>
+
   // Non-classpath Direct
   // No Jenkins: <groupId>org.apache.axis2</groupId><artifactId>axis2-webapp</artifactId>
   'webservices', // <groupId>com.aoindustries</groupId><artifactId>aoserv-webservices</artifactId>
