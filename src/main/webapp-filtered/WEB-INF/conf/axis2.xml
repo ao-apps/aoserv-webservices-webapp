@@ -45,6 +45,67 @@
     -->
     <parameter name="exposeServiceMetadata">true</parameter>
 
+    <!--
+    Ceilings on request bodies read directly off the transport stream by the
+    multipart/form-data and x-www-form-urlencoded message builders. Those
+    builders bypass the servlet container's own post-size limit, so without
+    these an anonymous caller chooses the allocation. Sizes are in bytes; -1
+    restores the unbounded behaviour of releases before 2.0.2. These may also be
+    set per service in services.xml.
+    -->
+    <parameter name="multipartMaxRequestSize">104857600</parameter>
+    <parameter name="multipartMaxFileSize">104857600</parameter>
+    <parameter name="formUrlEncodedMaxRequestSize">2097152</parameter>
+
+    <!--
+    Policy for WS-Addressing wsa:ReplyTo / wsa:FaultTo endpoints on inbound
+    server-side messages. A non-anonymous response endpoint makes the server
+    open a connection to an address the caller chose, so unless WS-Security is
+    engaged to bind that endpoint reference to a trusted issuer, these bound
+    where the server can be induced to connect.
+
+    Link-local (including the cloud instance-metadata addresses), wildcard and
+    multicast destinations are always refused - none is ever a legitimate reply
+    target. blockPrivateNetworkResponseEndpoints (default false) additionally
+    refuses loopback and private ranges; it is off by default because a callback
+    endpoint inside the same private network is how most decoupled deployments
+    are wired. Turn it on wherever the caller is not already inside the trusted
+    network.
+
+    allowNonAnonymousResponseEndpoints is FALSE by default as of 2.0.2: a
+    reply or fault only ever travels back down the inbound connection, so an
+    inbound header cannot name an outbound destination at all. Apache CXF made
+    the same call for the same reason in its
+    org.apache.cxf.ws.addressing.decoupled.enabled property.
+
+    Set it to true only if this deployment genuinely uses decoupled responses -
+    the separate-listener "Dual" clients (Options.setUseSeparateListener(true),
+    see samples/userguide EchoBlockingDualClient) or a third-party callback
+    endpoint. Those deployments should also set httpFrontendHostUrl so the
+    generated reply address is the real external URL rather than the client
+    machine's local IP.
+
+    allowedResponseEndpointHosts, when set to a comma-separated host list,
+    restricts response endpoints to exactly those hosts.
+
+    responseEndpointResolveTimeoutMillis (default 2000) bounds the name lookup
+    used by the checks above, so a slow resolver cannot hold a request thread.
+    Literal addresses are never looked up.
+
+    allowedResponseEndpointSchemes defaults to https ALONE. Plain http is
+    excluded on purpose: the cloud instance-metadata services this class of SSRF
+    targets (169.254.169.254 on AWS and Azure, metadata.google.internal on GCP)
+    are HTTP-only, so refusing the scheme removes that target outright. jms,
+    mailto and tcp have senders in the tree but are vanishingly rare as reply
+    destinations, so they are opt-in too. Name whatever a deployment genuinely
+    replies over, e.g. http,https for plain-HTTP callbacks inside a trusted
+    network.
+    -->
+    <parameter name="allowNonAnonymousResponseEndpoints">false</parameter>
+    <parameter name="blockPrivateNetworkResponseEndpoints">true</parameter><!-- AO Industries enabled -->
+    <!--<parameter name="allowedResponseEndpointHosts">replies.example.com</parameter>-->
+    <!--<parameter name="allowedResponseEndpointSchemes">https</parameter>-->
+
     <!--Uncomment if you want to plugin your own attachments lifecycle implementation -->
     <!--<attachmentsLifecycleManager class="org.apache.axiom.attachments.lifecycle.impl.LifecycleManagerImpl"/>-->
 
@@ -68,9 +129,25 @@
     <!--is set, then Axis2 tries to get the first exception and set its message as the faultreason/Reason.-->
     <parameter name="DrillDownToRootCauseForFaultReason">false</parameter>
 
-    <!-- AXIS2-6069, leave this in for unit tests but don't distribute it -->
-    <parameter name="userName">@{aoserv-webservices-webapp.axis2.userName}</parameter>
-    <parameter name="password">@{aoserv-webservices-webapp.axis2.password}</parameter>
+    <!-- AXIS2-6069. Empty on purpose: this file ships inside the axis2-webapp
+         WAR, so any value here is a published default credential for the
+         /axis2-admin console, which can upload services and therefore execute
+         code. AdminActions.login rejects empty submitted credentials before
+         comparing, so leaving these blank disables the console until an
+         operator sets both. The admin-console integration tests inject their
+         own values into the unpacked WAR (see systests/webapp-tests/pom.xml);
+         do not restore literals here to make a test pass. -->
+    <!--Whether a service may be selected from the namespace of the SOAP body's
+        first element. FALSE by default: the Dispatch phase runs after the Security
+        phase, so a service bound from message content is bound after the handlers
+        that would have authenticated the request for it have already run against no
+        service. Dispatch by request URI, SOAPAction and WS-Addressing is unaffected.
+        Turn this on only if services are genuinely addressed by body namespace, and
+        not together with per-service security modules.-->
+    <parameter name="allowContentBasedServiceDispatch">false</parameter>
+
+    <parameter name="userName">@{aoserv-webservices-webapp.axis2.userName}</parameter><!-- AO Industries configured -->
+    <parameter name="password">@{aoserv-webservices-webapp.axis2.password}</parameter><!-- AO Industries configured -->
 
     <!--To override repository/services you need to uncomment following parameter and value SHOULD be absolute file path.-->
     <!--ServicesDirectory only works on the following cases-->
@@ -204,11 +281,13 @@
          with name="https" and specify the port parameter on both receivers.
          For more information, please have a look at the servlet transport documentation:
          http://axis.apache.org/axis2/java/core/docs/servlet-transport.html -->
+    <!-- Begin AO Industries configured -->
     <transportReceiver name="@{aoserv-webservices-webapp.axis2.receiver}"
                        class="org.apache.axis2.transport.http.AxisServletListener">
         <parameter name="port">@{aoserv-webservices-webapp.axis2.port}</parameter>
         <parameter name="httpFrontendHostUrl">@{aoserv-webservices-webapp.axis2.httpFrontendHostUrl}</parameter>
     </transportReceiver>
+    <!-- End AO Industries configured -->
 
     <!--Uncomment if you want to have TCP transport support-->
     <!--transportReceiver name="tcp"
